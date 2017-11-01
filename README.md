@@ -14,12 +14,12 @@ The order to run things in is:
 1. preprocess.sh
   * This correlates to SVPreprocess
 2. Can choose from:
-  1. cnv_discovery.sh
+  * cnv_discovery.sh
     * This correlates to CNVDiscovery
     * Takes more time and resources than SVDiscovery
-  2. del_deletions_100k.sh
+  * del_deletions_100k.sh
     * This correlates to SVDiscovery
-  3. del_deletions_10M.sh
+  * del_deletions_10M.sh
     * This correlates to SVDiscovery
   * CNVDiscovery takes more time and more resources, so it is preferable to run SVDiscovery first
   * Both scripts use the same metadata from SVPreprocess
