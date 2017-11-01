@@ -10,20 +10,22 @@
     * `h_rt` specifies the running time
       * Ex: `h_rt=36:00:00` is 36 hours
 
-The order to run things in is
-* preprocess.sh
+The order to run things in is:
+1. preprocess.sh
   * This correlates to SVPreprocess
-* Can choose from
-  * cnv_discovery.sh
+2. Can choose from:
+  1. cnv_discovery.sh
     * This correlates to CNVDiscovery
     * Takes more time and resources than SVDiscovery
-  * del_deletions_100k.sh
+  2. del_deletions_100k.sh
     * This correlates to SVDiscovery
-  * del_deletions_10M.sh
+  3. del_deletions_10M.sh
     * This correlates to SVDiscovery
-* genotype.sh
+  * CNVDiscovery takes more time and more resources, so it is preferable to run SVDiscovery first
+  * Both scripts use the same metadata from SVPreprocess
+3. genotype.sh
 
-# Running SVPreprocess
+## Running SVPreprocess
 * Specify a file ending in `.list` that contains all the BAM files of the genome data
 * Run `sh preprocess.sh batch_name.list`
 
@@ -35,5 +37,5 @@ To submit the job:
 * Create a script and inside the script, place the commands `sh preprocess.sh batch_name.list`
 * Run `qsub -l h_rt=(time),h_data=(space),highp, submitting_job_script.sh`, where `submitting_job_script.sh` is the script you created
 
-# Running SVDiscovery
+## Running SVDiscovery
 * Make sure you have metadata from SVPreprocess
