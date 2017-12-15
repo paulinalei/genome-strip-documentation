@@ -10,7 +10,7 @@
     * `highp` means high priority
     * `h_rt` specifies the running time
       * Ex: `h_rt=36:00:00` is 36 hours
-      * May need to increase the time.
+      * May need to increase the time
 
 The order to run things in is:
 1. preprocess.sh
@@ -24,11 +24,12 @@ The order to run things in is:
   * del_deletions_10M.sh
     * This correlates to SVDiscovery
   * CNVDiscovery takes more time and more resources, so it is preferable to run SVDiscovery first
-  * Run the 100K SVDiscovery first to test, but the 10M SVDiscovery should be more accurate.
-  * Both scripts use the same metadata from SVPreprocess
+  * Run the 100K SVDiscovery first to test, but the 10M SVDiscovery should be more accurate
+  * These scripts use the same metadata from SVPreprocess
 3. genotype.sh
+  * This correlates to SVGenotyper
 4. base_annotator.sh
-  * Can run this to find differences between 100K SVDiscovery and 10 M SVDiscovery
+  * Can run this to find differences between 100K SVDiscovery and 10M SVDiscovery
   * Run only having finished the Discovery step
 
 ## Running SVPreprocess
@@ -51,7 +52,7 @@ To submit the job:
 
 ### Troubleshooting
 * If you have submitted the job but there is no error or output logs and the metadata is not being generated, there may not have been enough space to store the metadata
-  * Move output directories where the metadata should be to scratch space, and output should be there.
+  * Move output directories where the metadata should be to scratch space and the output should be there
 * If output logs are not showing, try removing the flags `-jobLogDir`, `-jobRunner Drmaa`, and `-jobNative` and run the script without submitting a job in the interactive node
   * This will output the error logs directly to terminal
 
