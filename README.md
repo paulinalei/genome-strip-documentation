@@ -2,7 +2,7 @@
 
 ## Set-up
 * You must be in an interactive node
-  * Run the command `qrsh -l, h_data=(space),highp,h_rt=(time)`
+  * Run the command `qrsh -l h_data=(space),highp,h_rt=(time)`
     * This lets you work in an interactive node
     * `h_data` specifies space you need
       * Ex: `h_data=4G`
@@ -24,21 +24,30 @@ The order to run things in is:
   * del_deletions_10M.sh
     * This correlates to SVDiscovery
   * CNVDiscovery takes more time and more resources, so it is preferable to run SVDiscovery first
+  * Run the 100K SVDiscovery first to test, but the 10M SVDiscovery should be more accurate.
   * Both scripts use the same metadata from SVPreprocess
 3. genotype.sh
+4. base_annotator.sh
+  * Can run this to find differences between 100K SVDiscovery and 10 M SVDiscovery
+  * Run only having finished the Discovery step
 
 ## Running SVPreprocess
 * Specify a file ending in `.list` that contains all the BAM files of the genome data
-  * Need at least 20 to 30 BAM files in order for metadata to generate.
+  * Need at least 20 to 30 BAM files in order for metadata to generate
 * Run `sh preprocess.sh batch_name.list`
 
 To test if it is working:
 * Remove the `-run \` flag in the script and run the above command
 * If something like `Website: http://broadinstitute` shows up, the script is running
+* Can cancel and submit the job so you can close the terminal or just have the terminal running
 
 To submit the job:
 * Create a script and inside the script, place the commands `sh preprocess.sh batch_name.list`
-* Run `qsub -l h_rt=(time),h_data=(space),highp, submitting_job_script.sh`, where `submitting_job_script.sh` is the script you created
+* Run `qsub -l h_rt=(time),h_data=(space),highp submitting_job_script.sh`, where `submitting_job_script.sh` is the script you created
+* Process can take about 4 days for 20 to 30 BAM files
+  * Once the job is complete, there should be logs that would be named
+    * `submitting_job_script.sh.e#######` for the error logs, where # is some number
+    * `submitting_job_script.sh.o#######` for the output logs, where # is some number
 
 ### Troubleshooting
 * If you have submitted the job but there is no error or output logs and the metadata is not being generated, there may not have been enough space to store the metadata
@@ -48,9 +57,9 @@ To submit the job:
 
 ## Running SVDiscovery
 * Make sure you have metadata from SVPreprocess
-* There is a flag that specifies where the metadata should be. This is the `-md` flag
+* There is a flag that specifies where the metadata should be and this is the `-md` flag
   * Make sure the directory goes to the specific metadata directory for each batch
   * If you want to run multiple batches of data, just keep adding the `-md` flag with the corresponding metadata directory
-  
+
 ### Troubleshooting
 * Remove `-jobLogDir` and `-jobRunner Drmaa` to have error logs printed directly to the terminal
