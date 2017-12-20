@@ -1,5 +1,6 @@
 # genome-strip-documentation
 The code that Alden Huang worked on is at [Genome Strip Code](https://bitbucket.org/furbelows/bipolar_sv/src/79ea9a73ed57?at=master)
+
 The code can also be found at `/u/home/p/paulinal/genome-strip/alden_code`
 
 The code that Paulina Lei modified from Alden Huang is in the directory `/u/home/p/paulinal/genome-strip`
